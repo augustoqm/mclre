@@ -69,13 +69,14 @@ theme_set(theme_bw())
 RunQuery <- function(query, params=c()){
 
   # PostgreSQl DB
+  LoadMe("DBI")
   LoadMe("RPostgreSQL")
 
   ## Loads the PostgreSQL driver
   drv <- dbDriver("PostgreSQL")
 
   ## Open a connection
-  con <- dbConnect(drv, user="augusto", pass="augusto_db", dbname="meetup_db")
+  con <- dbConnect(drv, user="augusto", host="localhost",port=5432,pass="augusto_db", dbname="meetup_db")
 
   # RUN QUERY
   result.set <- postgresqlExecStatement(con, query, params)
